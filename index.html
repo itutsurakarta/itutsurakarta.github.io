@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IT UTS Surakarta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue-deep: #0a1628;
+      --blue-mid: #0d2b5e;
+      --blue-bright: #1560bd;
+      --blue-electric: #2979ff;
+      --blue-sky: #4fc3f7;
+      --blue-glow: #82cffd;
+      --white: #ffffff;
+      --off-white: #e8f2ff;
+      --gray-light: #b0c8e8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--blue-deep);
+      color: var(--white);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ===== ANIMATED GRID BACKGROUND ===== */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(21, 96, 189, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21, 96, 189, 0.15) 1px, transparent 1px);
+      background-size: 48px 48px;
+      animation: gridPulse 8s ease-in-out infinite;
+    }
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* ===== GLOWING ORBS ===== */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: 0;
+      animation: float 10s ease-in-out infinite;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(41,121,255,0.35) 0%, transparent 70%);
+      top: -150px; right: -100px;
+      animation-delay: 0s;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(79,195,247,0.25) 0%, transparent 70%);
+      bottom: -100px; left: -80px;
+      animation-delay: -4s;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(21,96,189,0.4) 0%, transparent 70%);
+      top: 50%; left: 45%;
+      animation-delay: -7s;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.05); }
+      66% { transform: translate(-20px, 30px) scale(0.95); }
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 60px;
+      background: rgba(10, 22, 40, 0.7);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(41,121,255,0.2);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--blue-electric), var(--blue-sky));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700; font-size: 14px;
+      color: var(--white);
+      box-shadow: 0 0 20px rgba(41,121,255,0.5);
+    }
+    .logo-text {
+      font-weight: 700; font-size: 18px;
+      letter-spacing: 0.02em;
+      color: var(--white);
+    }
+    .logo-text span { color: var(--blue-sky); }
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+      text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--blue-sky); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--blue-electric), var(--blue-sky));
+      color: var(--white);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(41,121,255,0.3);
+    }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(41,121,255,0.5);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative; z-index: 10;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 140px 40px 80px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(41,121,255,0.15);
+      border: 1px solid rgba(41,121,255,0.4);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 13px; font-weight: 600;
+      color: var(--blue-sky);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--blue-sky);
+      box-shadow: 0 0 8px var(--blue-sky);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    h1 {
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      animation: fadeUp 0.8s ease 0.1s both;
+    }
+    h1 .line-white { color: var(--white); display: block; }
+    h1 .line-blue {
+      background: linear-gradient(135deg, var(--blue-electric) 0%, var(--blue-sky) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+    .hero-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(13px, 2vw, 16px);
+      color: var(--gray-light);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+    .hero-desc {
+      max-width: 580px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--off-white);
+      opacity: 0.85;
+      margin-bottom: 48px;
+      animation: fadeUp 0.8s ease 0.3s both;
+    }
+    .hero-btns {
+      display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.8s ease 0.4s both;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue-electric), var(--blue-sky));
+      color: var(--white);
+      border: none;
+      padding: 16px 36px;
+      border-radius: 10px;
+      font-family: 'Sora', sans-serif;
+      font-size: 15px; font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 6px 30px rgba(41,121,255,0.4);
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(41,121,255,0.6);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      padding: 16px 36px;
+      border-radius: 10px;
+      font-family: 'Sora', sans-serif;
+      font-size: 15px; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-secondary:hover {
+      border-color: var(--blue-sky);
+      color: var(--blue-sky);
+      transform: translateY(-3px);
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      position: relative; z-index: 10;
+      display: flex; gap: 0;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0 40px 80px;
+      animation: fadeUp 0.8s ease 0.5s both;
+    }
+    .stat-item {
+      padding: 28px 50px;
+      border-left: 1px solid rgba(41,121,255,0.2);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: 1px solid rgba(41,121,255,0.2); }
+    .stat-num {
+      font-size: 40px; font-weight: 800;
+      background: linear-gradient(135deg, var(--white), var(--blue-sky));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--gray-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== SECTION DIVIDER ===== */
+    .section-line {
+      position: relative; z-index: 10;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue-electric), var(--blue-sky), transparent);
+      margin: 0 40px 80px;
+    }
+
+    /* ===== CARDS ===== */
+    .cards-section {
+      position: relative; z-index: 10;
+      padding: 0 60px 100px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 13px;
+      font-family: 'Space Mono', monospace;
+      color: var(--blue-sky);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      text-align: center;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      margin-bottom: 56px;
+      letter-spacing: -0.02em;
+    }
+    .section-heading span {
+      background: linear-gradient(135deg, var(--blue-electric), var(--blue-sky));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(13, 43, 94, 0.4);
+      border: 1px solid rgba(41,121,255,0.2);
+      border-radius: 16px;
+      padding: 36px 30px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(41,121,255,0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .card:hover {
+      border-color: rgba(41,121,255,0.6);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(41,121,255,0.15);
+    }
+    .card:hover::before { opacity: 1; }
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+      position: relative; z-index: 1;
+    }
+    .card-icon-blue { background: rgba(41,121,255,0.2); }
+    .card-icon-cyan { background: rgba(79,195,247,0.2); }
+    .card-icon-indigo { background: rgba(63,81,181,0.2); }
+    .card h3 {
+      font-size: 20px; font-weight: 700;
+      margin-bottom: 12px;
+      position: relative; z-index: 1;
+    }
+    .card p {
+      font-size: 14px; line-height: 1.7;
+      color: var(--gray-light);
+      position: relative; z-index: 1;
+    }
+
+    /* ===== ANNOUNCEMENT TICKER ===== */
+    .ticker-wrap {
+      position: relative; z-index: 10;
+      overflow: hidden;
+      padding: 16px 0;
+      background: rgba(41,121,255,0.1);
+      border-top: 1px solid rgba(41,121,255,0.2);
+      border-bottom: 1px solid rgba(41,121,255,0.2);
+      margin-bottom: 80px;
+    }
+    .ticker {
+      display: flex; gap: 80px;
+      width: max-content;
+      animation: ticker 25s linear infinite;
+    }
+    .ticker-item {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--blue-sky);
+      white-space: nowrap;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .ticker-item::before {
+      content: '◆';
+      color: var(--blue-electric);
+      font-size: 8px;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative; z-index: 10;
+      background: rgba(7, 14, 28, 0.9);
+      border-top: 1px solid rgba(41,121,255,0.2);
+      padding: 40px 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo { font-weight: 700; font-size: 16px; }
+    .footer-logo span { color: var(--blue-sky); }
+    .footer-links {
+      display: flex; gap: 28px; list-style: none;
+    }
+    .footer-links a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--blue-sky); }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(176,200,232,0.5);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 120px 24px 60px; }
+      .stats-bar { padding: 0 24px 60px; }
+      .stat-item { padding: 20px 28px; }
+      .cards-section { padding: 0 24px 80px; }
+      footer { padding: 30px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-grid"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-icon">IT</div>
+    <div class="logo-text">IT UTS <span>Surakarta</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Beranda</a></li>
+    <li><a href="#">Akademik</a></li>
+    <li><a href="#">Kemahasiswaan</a></li>
+    <li><a href="#">Riset</a></li>
+    <li><a href="#">Kontak</a></li>
+  </ul>
+  <button class="nav-cta">Daftar Sekarang</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">Program Studi Informatika</div>
+  <h1>
+    <span class="line-white">Selamat Datang di</span>
+    <span class="line-blue">Informatika UTS</span>
+  </h1>
+  <p class="hero-sub">Universitas Teknologi Surakarta</p>
+  <p class="hero-desc">
+    Membangun generasi teknolog unggul yang inovatif, berdaya saing global,
+    dan berkarakter. Bergabunglah dan wujudkan masa depan digital bersama kami.
+  </p>
+  <div class="hero-btns">
+    <a href="#" class="btn-primary">Jelajahi Program</a>
+    <a href="#" class="btn-secondary">Lihat Profil →</a>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">2400+</div>
+    <div class="stat-label">Mahasiswa Aktif</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">96%</div>
+    <div class="stat-label">Tingkat Kelulusan</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">85+</div>
+    <div class="stat-label">Mitra Industri</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">A</div>
+    <div class="stat-label">Akreditasi BAN-PT</div>
+  </div>
+</div>
+
+<!-- Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">Pendaftaran Mahasiswa Baru 2025/2026 Dibuka</span>
+    <span class="ticker-item">Seminar Nasional Teknologi Informasi — 20 April 2025</span>
+    <span class="ticker-item">Hackathon IT UTS 2025 — Daftarkan Tim Anda</span>
+    <span class="ticker-item">Beasiswa Prestasi Akademik Tersedia</span>
+    <span class="ticker-item">Workshop AI & Machine Learning — 15 Mei 2025</span>
+    <span class="ticker-item">Pendaftaran Mahasiswa Baru 2025/2026 Dibuka</span>
+    <span class="ticker-item">Seminar Nasional Teknologi Informasi — 20 April 2025</span>
+    <span class="ticker-item">Hackathon IT UTS 2025 — Daftarkan Tim Anda</span>
+    <span class="ticker-item">Beasiswa Prestasi Akademik Tersedia</span>
+    <span class="ticker-item">Workshop AI & Machine Learning — 15 Mei 2025</span>
+  </div>
+</div>
+
+<!-- Cards -->
+<section class="cards-section">
+  <p class="section-title">Keunggulan Kami</p>
+  <h2 class="section-heading">Mengapa <span>Informatika UTS?</span></h2>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon card-icon-blue">💻</div>
+      <h3>Kurikulum Berbasis Industri</h3>
+      <p>Kurikulum yang selalu diperbarui bersama mitra industri terkemuka untuk memastikan relevansi dan kesiapan kerja lulusan.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon card-icon-cyan">🤖</div>
+      <h3>Lab AI & Data Science</h3>
+      <p>Fasilitas laboratorium mutakhir untuk riset kecerdasan buatan, machine learning, dan analisis data berskala besar.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon card-icon-indigo">🌐</div>
+      <h3>Jaringan Alumni Global</h3>
+      <p>Terhubung dengan ribuan alumni yang tersebar di perusahaan teknologi terkemuka di Indonesia dan mancanegara.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon card-icon-blue">🏆</div>
+      <h3>Prestasi & Kompetisi</h3>
+      <p>Aktif dalam kompetisi nasional dan internasional — dari hackathon, olympiade informatika, hingga riset ilmiah.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon card-icon-cyan">📚</div>
+      <h3>Dosen Berpengalaman</h3>
+      <p>Tim pengajar berpendidikan S2 dan S3 dengan pengalaman industri langsung dan publikasi ilmiah internasional.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon card-icon-indigo">🚀</div>
+      <h3>Program Magang & Karier</h3>
+      <p>Kemitraan eksklusif untuk magang dan penempatan kerja di startup, BUMN, dan perusahaan multinasional.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">IT UTS <span>Surakarta</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Tentang Kami</a></li>
+    <li><a href="#">Akademik</a></li>
+    <li><a href="#">Berita</a></li>
+    <li><a href="#">Kontak</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Informatika UTS Surakarta. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
