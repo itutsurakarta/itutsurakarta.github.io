@@ -3,556 +3,701 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IT UT Surakarta</title>
+  <title>UKM IT UT Surakarta</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --blue-deep: #0a1628;
-      --blue-mid: #0d2b5e;
-      --blue-bright: #1560bd;
+      --blue-deep: #050e1f;
+      --blue-mid: #0a1e42;
+      --blue-bright: #1040a0;
       --blue-electric: #2979ff;
       --blue-sky: #4fc3f7;
       --blue-glow: #82cffd;
+      --cyan: #00e5ff;
       --white: #ffffff;
-      --off-white: #e8f2ff;
-      --gray-light: #b0c8e8;
+      --off-white: #dceeff;
+      --gray-light: #8aaccc;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Sora', sans-serif;
       background: var(--blue-deep);
       color: var(--white);
       overflow-x: hidden;
-      min-height: 100vh;
     }
 
-    /* ===== ANIMATED GRID BACKGROUND ===== */
+    /* BACKGROUND */
     .bg-grid {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
+      position: fixed; inset: 0; z-index: 0;
       background-image:
-        linear-gradient(rgba(21, 96, 189, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(21, 96, 189, 0.15) 1px, transparent 1px);
-      background-size: 48px 48px;
-      animation: gridPulse 8s ease-in-out infinite;
+        linear-gradient(rgba(41,121,255,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(41,121,255,0.12) 1px, transparent 1px);
+      background-size: 52px 52px;
+      animation: gridPulse 10s ease-in-out infinite;
     }
-    @keyframes gridPulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
+    @keyframes gridPulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
 
-    /* ===== GLOWING ORBS ===== */
     .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      z-index: 0;
-      animation: float 10s ease-in-out infinite;
+      position: fixed; border-radius: 50%; filter: blur(90px); z-index: 0;
+      animation: float 12s ease-in-out infinite;
     }
-    .orb-1 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(41,121,255,0.35) 0%, transparent 70%);
-      top: -150px; right: -100px;
-      animation-delay: 0s;
-    }
-    .orb-2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(79,195,247,0.25) 0%, transparent 70%);
-      bottom: -100px; left: -80px;
-      animation-delay: -4s;
-    }
-    .orb-3 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(21,96,189,0.4) 0%, transparent 70%);
-      top: 50%; left: 45%;
-      animation-delay: -7s;
-    }
+    .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(41,121,255,0.3) 0%, transparent 70%); top:-200px; right:-150px; }
+    .orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(0,229,255,0.18) 0%, transparent 70%); bottom:-120px; left:-100px; animation-delay:-5s; }
+    .orb-3 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(16,64,160,0.45) 0%, transparent 70%); top:55%; left:40%; animation-delay:-8s; }
     @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -40px) scale(1.05); }
-      66% { transform: translate(-20px, 30px) scale(0.95); }
+      0%,100%{transform:translate(0,0) scale(1)}
+      33%{transform:translate(25px,-35px) scale(1.04)}
+      66%{transform:translate(-18px,28px) scale(0.96)}
     }
 
-    /* ===== NAVBAR ===== */
+    /* NAV */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 60px;
-      background: rgba(10, 22, 40, 0.7);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(41,121,255,0.2);
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 18px 60px;
+      background: rgba(5,14,31,0.75);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(41,121,255,0.18);
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: 12px;
-    }
+    .nav-logo { display:flex; align-items:center; gap:12px; }
     .logo-icon {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, var(--blue-electric), var(--blue-sky));
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Space Mono', monospace;
-      font-weight: 700; font-size: 14px;
-      color: var(--white);
-      box-shadow: 0 0 20px rgba(41,121,255,0.5);
+      width:42px; height:42px;
+      background: linear-gradient(135deg, var(--blue-electric), var(--cyan));
+      border-radius:10px; display:flex; align-items:center; justify-content:center;
+      font-family:'Space Mono',monospace; font-weight:700; font-size:12px; color:#fff;
+      box-shadow:0 0 24px rgba(41,121,255,0.55);
     }
-    .logo-text {
-      font-weight: 700; font-size: 18px;
-      letter-spacing: 0.02em;
-      color: var(--white);
-    }
+    .logo-text { font-weight:700; font-size:17px; letter-spacing:0.02em; }
     .logo-text span { color: var(--blue-sky); }
-    .nav-links {
-      display: flex; gap: 36px; list-style: none;
-    }
+    .nav-links { display:flex; gap:32px; list-style:none; }
     .nav-links a {
-      color: var(--gray-light);
-      text-decoration: none;
-      font-size: 14px; font-weight: 500;
-      letter-spacing: 0.04em;
-      transition: color 0.3s;
-      text-transform: uppercase;
+      color: var(--gray-light); text-decoration:none; font-size:13px; font-weight:500;
+      letter-spacing:0.06em; text-transform:uppercase; transition:color 0.3s;
     }
     .nav-links a:hover { color: var(--blue-sky); }
     .nav-cta {
-      background: linear-gradient(135deg, var(--blue-electric), var(--blue-sky));
-      color: var(--white);
-      border: none;
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-family: 'Sora', sans-serif;
-      font-size: 14px; font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 4px 20px rgba(41,121,255,0.3);
+      background: linear-gradient(135deg, var(--blue-electric), var(--cyan));
+      color:#fff; border:none; padding:10px 22px; border-radius:8px;
+      font-family:'Sora',sans-serif; font-size:13px; font-weight:700; cursor:pointer;
+      transition:all 0.3s; box-shadow:0 4px 20px rgba(41,121,255,0.35);
     }
-    .nav-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(41,121,255,0.5);
-    }
+    .nav-cta:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(41,121,255,0.55); }
 
-    /* ===== HERO ===== */
+    /* HERO */
     .hero {
-      position: relative; z-index: 10;
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 140px 40px 80px;
+      position:relative; z-index:10;
+      min-height:100vh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center; padding: 140px 40px 60px;
     }
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(41,121,255,0.15);
-      border: 1px solid rgba(41,121,255,0.4);
-      border-radius: 100px;
-      padding: 8px 20px;
-      font-size: 13px; font-weight: 600;
-      color: var(--blue-sky);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 32px;
+      display:inline-flex; align-items:center; gap:8px;
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.35);
+      border-radius:100px; padding:8px 22px;
+      font-size:12px; font-weight:700; color: var(--cyan);
+      letter-spacing:0.12em; text-transform:uppercase; margin-bottom:28px;
       animation: fadeUp 0.8s ease both;
     }
     .hero-badge::before {
-      content: '';
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--blue-sky);
-      box-shadow: 0 0 8px var(--blue-sky);
-      animation: blink 1.5s ease-in-out infinite;
+      content:''; width:8px; height:8px; border-radius:50%;
+      background: var(--cyan); box-shadow:0 0 10px var(--cyan);
+      animation:blink 1.6s ease-in-out infinite;
     }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.15}}
     h1 {
-      font-size: clamp(52px, 8vw, 96px);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
+      font-size: clamp(44px, 7.5vw, 92px); font-weight:800;
+      line-height:1.04; letter-spacing:-0.03em; margin-bottom:10px;
       animation: fadeUp 0.8s ease 0.1s both;
     }
-    h1 .line-white { color: var(--white); display: block; }
+    h1 .line-white { color:var(--white); display:block; }
     h1 .line-blue {
-      background: linear-gradient(135deg, var(--blue-electric) 0%, var(--blue-sky) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      display: block;
+      background: linear-gradient(135deg, var(--blue-electric) 0%, var(--cyan) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      display:block;
     }
     .hero-sub {
-      font-family: 'Space Mono', monospace;
-      font-size: clamp(13px, 2vw, 16px);
-      color: var(--gray-light);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      animation: fadeUp 0.8s ease 0.2s both;
+      font-family:'Space Mono',monospace; font-size:clamp(12px,1.8vw,15px);
+      color: var(--gray-light); letter-spacing:0.18em; text-transform:uppercase;
+      margin-bottom:20px; animation: fadeUp 0.8s ease 0.2s both;
     }
     .hero-desc {
-      max-width: 580px;
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--off-white);
-      opacity: 0.85;
-      margin-bottom: 48px;
-      animation: fadeUp 0.8s ease 0.3s both;
+      max-width:600px; font-size:16px; line-height:1.8; color: var(--off-white);
+      opacity:0.85; margin-bottom:44px; animation: fadeUp 0.8s ease 0.3s both;
     }
     .hero-btns {
-      display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
       animation: fadeUp 0.8s ease 0.4s both;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--blue-electric), var(--blue-sky));
-      color: var(--white);
-      border: none;
-      padding: 16px 36px;
-      border-radius: 10px;
-      font-family: 'Sora', sans-serif;
-      font-size: 15px; font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 6px 30px rgba(41,121,255,0.4);
-      text-decoration: none; display: inline-block;
+      background: linear-gradient(135deg, var(--blue-electric), var(--cyan));
+      color:#fff; border:none; padding:15px 34px; border-radius:10px;
+      font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
+      cursor:pointer; transition:all 0.3s;
+      box-shadow:0 6px 30px rgba(41,121,255,0.4);
+      text-decoration:none; display:inline-block;
     }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(41,121,255,0.6);
-    }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 14px 40px rgba(0,229,255,0.4); }
     .btn-secondary {
-      background: transparent;
-      color: var(--white);
-      border: 1.5px solid rgba(255,255,255,0.25);
-      padding: 16px 36px;
-      border-radius: 10px;
-      font-family: 'Sora', sans-serif;
-      font-size: 15px; font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none; display: inline-block;
+      background:transparent; color:#fff;
+      border:1.5px solid rgba(255,255,255,0.22); padding:15px 34px; border-radius:10px;
+      font-family:'Sora',sans-serif; font-size:14px; font-weight:600;
+      cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-block;
     }
-    .btn-secondary:hover {
-      border-color: var(--blue-sky);
-      color: var(--blue-sky);
-      transform: translateY(-3px);
-    }
+    .btn-secondary:hover { border-color:var(--cyan); color:var(--cyan); transform:translateY(-3px); }
 
-    /* ===== STATS BAR ===== */
+    /* STATS */
     .stats-bar {
-      position: relative; z-index: 10;
-      display: flex; gap: 0;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 0 40px 80px;
-      animation: fadeUp 0.8s ease 0.5s both;
+      position:relative; z-index:10;
+      display:flex; justify-content:center; flex-wrap:wrap;
+      padding: 0 40px 80px; animation: fadeUp 0.8s ease 0.5s both;
     }
     .stat-item {
-      padding: 28px 50px;
-      border-left: 1px solid rgba(41,121,255,0.2);
-      text-align: center;
+      padding:26px 48px;
+      border-left:1px solid rgba(41,121,255,0.2); text-align:center;
     }
-    .stat-item:last-child { border-right: 1px solid rgba(41,121,255,0.2); }
+    .stat-item:last-child { border-right:1px solid rgba(41,121,255,0.2); }
     .stat-num {
-      font-size: 40px; font-weight: 800;
-      background: linear-gradient(135deg, var(--white), var(--blue-sky));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 6px;
+      font-size:38px; font-weight:800;
+      background: linear-gradient(135deg, #fff, var(--cyan));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      line-height:1; margin-bottom:6px;
     }
-    .stat-label {
-      font-size: 12px;
-      color: var(--gray-light);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
+    .stat-label { font-size:11px; color: var(--gray-light); text-transform:uppercase; letter-spacing:0.12em; }
 
-    /* ===== SECTION DIVIDER ===== */
+    /* TICKER */
+    .ticker-wrap {
+      position:relative; z-index:10; overflow:hidden;
+      padding:15px 0;
+      background: rgba(0,229,255,0.07);
+      border-top:1px solid rgba(0,229,255,0.18);
+      border-bottom:1px solid rgba(0,229,255,0.18);
+      margin-bottom:90px;
+    }
+    .ticker { display:flex; gap:72px; width:max-content; animation:ticker 30s linear infinite; }
+    .ticker-item {
+      font-family:'Space Mono',monospace; font-size:12px;
+      color:var(--cyan); white-space:nowrap;
+      display:flex; align-items:center; gap:14px;
+    }
+    .ticker-item::before { content:'◆'; color:var(--blue-electric); font-size:8px; }
+    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* SECTION */
     .section-line {
-      position: relative; z-index: 10;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--blue-electric), var(--blue-sky), transparent);
-      margin: 0 40px 80px;
+      position:relative; z-index:10; height:1px;
+      background: linear-gradient(90deg, transparent, var(--blue-electric), var(--cyan), transparent);
+      margin: 0 60px 90px;
     }
-
-    /* ===== CARDS ===== */
-    .cards-section {
-      position: relative; z-index: 10;
-      padding: 0 60px 100px;
-    }
-    .section-title {
-      text-align: center;
-      font-size: 13px;
-      font-family: 'Space Mono', monospace;
-      color: var(--blue-sky);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+    .section-label {
+      text-align:center; font-size:12px; font-family:'Space Mono',monospace;
+      color:var(--cyan); letter-spacing:0.22em; text-transform:uppercase; margin-bottom:10px;
     }
     .section-heading {
-      text-align: center;
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 800;
-      margin-bottom: 56px;
-      letter-spacing: -0.02em;
+      text-align:center; font-size:clamp(26px,4vw,42px); font-weight:800;
+      margin-bottom:52px; letter-spacing:-0.02em;
     }
     .section-heading span {
-      background: linear-gradient(135deg, var(--blue-electric), var(--blue-sky));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .card {
-      background: rgba(13, 43, 94, 0.4);
-      border: 1px solid rgba(41,121,255,0.2);
-      border-radius: 16px;
-      padding: 36px 30px;
-      transition: all 0.4s;
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(41,121,255,0.08), transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .card:hover {
-      border-color: rgba(41,121,255,0.6);
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(41,121,255,0.15);
-    }
-    .card:hover::before { opacity: 1; }
-    .card-icon {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-      margin-bottom: 20px;
-      position: relative; z-index: 1;
-    }
-    .card-icon-blue { background: rgba(41,121,255,0.2); }
-    .card-icon-cyan { background: rgba(79,195,247,0.2); }
-    .card-icon-indigo { background: rgba(63,81,181,0.2); }
-    .card h3 {
-      font-size: 20px; font-weight: 700;
-      margin-bottom: 12px;
-      position: relative; z-index: 1;
-    }
-    .card p {
-      font-size: 14px; line-height: 1.7;
-      color: var(--gray-light);
-      position: relative; z-index: 1;
+      background: linear-gradient(135deg, var(--blue-electric), var(--cyan));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
     }
 
-    /* ===== ANNOUNCEMENT TICKER ===== */
-    .ticker-wrap {
-      position: relative; z-index: 10;
-      overflow: hidden;
-      padding: 16px 0;
-      background: rgba(41,121,255,0.1);
-      border-top: 1px solid rgba(41,121,255,0.2);
-      border-bottom: 1px solid rgba(41,121,255,0.2);
-      margin-bottom: 80px;
+    /* ABOUT UKM */
+    .about-section {
+      position:relative; z-index:10; padding: 0 60px 100px;
     }
-    .ticker {
-      display: flex; gap: 80px;
-      width: max-content;
-      animation: ticker 25s linear infinite;
+    .about-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:60px;
+      max-width:1100px; margin:0 auto; align-items:center;
     }
-    .ticker-item {
-      font-family: 'Space Mono', monospace;
-      font-size: 13px;
-      color: var(--blue-sky);
-      white-space: nowrap;
-      display: flex; align-items: center; gap: 16px;
+    .about-content h2 {
+      font-size:clamp(28px,4vw,44px); font-weight:800;
+      line-height:1.15; margin-bottom:20px; letter-spacing:-0.02em;
     }
-    .ticker-item::before {
-      content: '◆';
-      color: var(--blue-electric);
-      font-size: 8px;
+    .about-content h2 span {
+      background: linear-gradient(135deg, var(--blue-electric), var(--cyan));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
     }
-    @keyframes ticker {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .about-content p {
+      font-size:15px; line-height:1.8; color:var(--off-white); opacity:0.85; margin-bottom:16px;
     }
+    .about-pillars { display:flex; flex-direction:column; gap:14px; margin-top:24px; }
+    .pillar {
+      display:flex; align-items:center; gap:14px;
+      background: rgba(41,121,255,0.08);
+      border:1px solid rgba(41,121,255,0.2); border-radius:10px; padding:14px 18px;
+      transition:all 0.3s;
+    }
+    .pillar:hover { border-color:var(--cyan); background:rgba(0,229,255,0.08); }
+    .pillar-icon { font-size:22px; flex-shrink:0; }
+    .pillar-text strong { font-size:14px; font-weight:700; color:#fff; display:block; margin-bottom:3px; }
+    .pillar-text span { font-size:12px; color:var(--gray-light); }
+    .about-visual {
+      display:flex; flex-direction:column; gap:16px;
+    }
+    .visual-card {
+      background: rgba(13,43,94,0.45);
+      border:1px solid rgba(41,121,255,0.2); border-radius:14px;
+      padding:28px; position:relative; overflow:hidden; transition:all 0.4s;
+    }
+    .visual-card:hover { border-color:rgba(0,229,255,0.5); transform:translateX(6px); }
+    .visual-card::after {
+      content:''; position:absolute; top:0; right:0;
+      width:80px; height:80px;
+      background: radial-gradient(circle, rgba(0,229,255,0.15) 0%, transparent 70%);
+    }
+    .visual-card-num {
+      font-family:'Space Mono',monospace; font-size:36px; font-weight:700;
+      background: linear-gradient(135deg, #fff, var(--cyan));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      line-height:1; margin-bottom:6px;
+    }
+    .visual-card-label { font-size:13px; color:var(--gray-light); }
 
-    /* ===== FOOTER ===== */
+    /* KEGIATAN / PROGRAMS */
+    .kegiatan-section {
+      position:relative; z-index:10; padding: 0 60px 100px;
+    }
+    .kegiatan-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+      max-width:1100px; margin:0 auto;
+    }
+    .kegiatan-card {
+      background: rgba(10,30,66,0.5);
+      border:1px solid rgba(41,121,255,0.22);
+      border-radius:18px; padding:40px 30px; position:relative; overflow:hidden;
+      transition:all 0.4s; cursor:default;
+    }
+    .kegiatan-card::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(135deg, rgba(41,121,255,0.1), transparent);
+      opacity:0; transition:opacity 0.4s;
+    }
+    .kegiatan-card:hover { transform:translateY(-8px); box-shadow:0 24px 60px rgba(0,229,255,0.12); border-color:var(--cyan); }
+    .kegiatan-card:hover::before { opacity:1; }
+    .keg-badge {
+      display:inline-block; font-family:'Space Mono',monospace; font-size:10px;
+      font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+      padding:5px 12px; border-radius:100px; margin-bottom:20px;
+      position:relative; z-index:1;
+    }
+    .badge-mentoring { background:rgba(41,121,255,0.2); color:var(--blue-sky); border:1px solid rgba(41,121,255,0.4); }
+    .badge-robocode { background:rgba(0,229,255,0.1); color:var(--cyan); border:1px solid rgba(0,229,255,0.35); }
+    .badge-robofam { background:rgba(63,81,181,0.2); color:#9fa8da; border:1px solid rgba(63,81,181,0.4); }
+    .keg-num {
+      font-family:'Space Mono',monospace; font-size:48px; font-weight:700;
+      line-height:1; margin-bottom:16px; position:relative; z-index:1;
+    }
+    .num-mentoring { color: var(--blue-sky); }
+    .num-robocode { color: var(--cyan); }
+    .num-robofam { color: #9fa8da; }
+    .keg-title {
+      font-size:22px; font-weight:800; margin-bottom:12px;
+      position:relative; z-index:1; letter-spacing:-0.01em;
+    }
+    .keg-desc {
+      font-size:13px; line-height:1.75; color:var(--gray-light);
+      position:relative; z-index:1;
+    }
+    .keg-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; position:relative; z-index:1; }
+    .keg-tag {
+      font-size:11px; padding:4px 10px; border-radius:6px;
+      background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.55);
+      border:1px solid rgba(255,255,255,0.1);
+    }
+    .keg-divider {
+      height:3px; border-radius:2px; margin-top:28px; position:relative; z-index:1;
+      transition:width 0.4s;
+    }
+    .div-mentoring { background: linear-gradient(90deg, var(--blue-electric), var(--blue-sky)); width:40%; }
+    .div-robocode { background: linear-gradient(90deg, var(--cyan), #00bcd4); width:40%; }
+    .div-robofam { background: linear-gradient(90deg, #3f51b5, #9fa8da); width:40%; }
+    .kegiatan-card:hover .keg-divider { width:100%; }
+
+    /* MANFAAT */
+    .manfaat-section {
+      position:relative; z-index:10; padding: 0 60px 100px;
+    }
+    .manfaat-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px;
+      max-width:1100px; margin:0 auto;
+    }
+    .manfaat-card {
+      background:rgba(13,43,94,0.35); border:1px solid rgba(41,121,255,0.18);
+      border-radius:14px; padding:30px 26px; transition:all 0.35s;
+    }
+    .manfaat-card:hover { border-color:rgba(0,229,255,0.45); transform:translateY(-5px); box-shadow:0 16px 40px rgba(41,121,255,0.12); }
+    .manfaat-icon { font-size:28px; margin-bottom:16px; }
+    .manfaat-card h3 { font-size:17px; font-weight:700; margin-bottom:10px; }
+    .manfaat-card p { font-size:13px; line-height:1.7; color:var(--gray-light); }
+
+    /* TESTIMONIAL */
+    .testimonial-section {
+      position:relative; z-index:10; padding: 0 60px 100px;
+    }
+    .testi-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+      max-width:1100px; margin:0 auto;
+    }
+    .testi-card {
+      background:rgba(10,30,66,0.45); border:1px solid rgba(41,121,255,0.2);
+      border-radius:14px; padding:28px; transition:all 0.3s;
+    }
+    .testi-card:hover { border-color:rgba(0,229,255,0.4); }
+    .testi-stars { color:var(--cyan); font-size:13px; margin-bottom:14px; letter-spacing:2px; }
+    .testi-text { font-size:13px; line-height:1.75; color:var(--off-white); opacity:0.85; margin-bottom:18px; font-style:italic; }
+    .testi-author { display:flex; align-items:center; gap:12px; }
+    .testi-avatar {
+      width:36px; height:36px; border-radius:50%;
+      background: linear-gradient(135deg, var(--blue-electric), var(--cyan));
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:13px;
+    }
+    .testi-name { font-size:13px; font-weight:700; }
+    .testi-role { font-size:11px; color:var(--gray-light); }
+
+    /* CTA BAND */
+    .cta-band {
+      position:relative; z-index:10; margin: 0 60px 100px;
+      background: linear-gradient(135deg, rgba(41,121,255,0.2), rgba(0,229,255,0.12));
+      border:1px solid rgba(0,229,255,0.25); border-radius:20px;
+      padding:60px; text-align:center; overflow:hidden;
+    }
+    .cta-band::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(41,121,255,0.15), transparent);
+    }
+    .cta-band h2 { font-size:clamp(26px,4vw,42px); font-weight:800; margin-bottom:14px; position:relative; z-index:1; }
+    .cta-band p { font-size:15px; color:var(--off-white); opacity:0.8; margin-bottom:32px; position:relative; z-index:1; max-width:520px; margin-left:auto; margin-right:auto; }
+    .cta-band .hero-btns { position:relative; z-index:1; }
+
+    /* FOOTER */
     footer {
-      position: relative; z-index: 10;
-      background: rgba(7, 14, 28, 0.9);
-      border-top: 1px solid rgba(41,121,255,0.2);
-      padding: 40px 60px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 20px;
+      position:relative; z-index:10;
+      background:rgba(3,8,18,0.92); border-top:1px solid rgba(41,121,255,0.18);
+      padding:40px 60px;
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:20px;
     }
-    .footer-logo { font-weight: 700; font-size: 16px; }
-    .footer-logo span { color: var(--blue-sky); }
-    .footer-links {
-      display: flex; gap: 28px; list-style: none;
-    }
-    .footer-links a {
-      color: var(--gray-light);
-      text-decoration: none;
-      font-size: 13px;
-      transition: color 0.3s;
-    }
-    .footer-links a:hover { color: var(--blue-sky); }
-    .footer-copy {
-      font-size: 12px;
-      color: rgba(176,200,232,0.5);
-    }
+    .footer-logo { font-weight:700; font-size:16px; }
+    .footer-logo span { color:var(--blue-sky); }
+    .footer-links { display:flex; gap:26px; list-style:none; }
+    .footer-links a { color:var(--gray-light); text-decoration:none; font-size:13px; transition:color 0.3s; }
+    .footer-links a:hover { color:var(--cyan); }
+    .footer-copy { font-size:11px; color:rgba(176,200,232,0.4); }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
 
-    @media (max-width: 768px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      .hero { padding: 120px 24px 60px; }
-      .stats-bar { padding: 0 24px 60px; }
-      .stat-item { padding: 20px 28px; }
-      .cards-section { padding: 0 24px 80px; }
-      footer { padding: 30px 24px; }
+    @media(max-width:900px){
+      nav{padding:16px 24px;}
+      .nav-links{display:none;}
+      .hero{padding:120px 24px 60px;}
+      .stats-bar,.about-section,.kegiatan-section,.manfaat-section,.testimonial-section{padding-left:24px;padding-right:24px;}
+      .about-grid{grid-template-columns:1fr;}
+      .kegiatan-grid{grid-template-columns:1fr;}
+      .testi-grid{grid-template-columns:1fr;}
+      .cta-band{margin:0 24px 80px;padding:40px 28px;}
+      footer{padding:28px 24px;}
+      .section-line{margin:0 24px 70px;}
     }
   </style>
 </head>
 <body>
 
-<!-- Background -->
 <div class="bg-grid"></div>
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
 
-<!-- Navbar -->
+<!-- NAVBAR -->
 <nav>
   <div class="nav-logo">
-    <div class="logo-icon">IT</div>
-    <div class="logo-text">IT UT <span>Surakarta</span></div>
+    <div class="logo-icon">UKM</div>
+    <div class="logo-text">UKM IT <span>UT Surakarta</span></div>
   </div>
   <ul class="nav-links">
     <li><a href="#">Beranda</a></li>
-    <li><a href="#">Akademik</a></li>
-    <li><a href="#">Kemahasiswaan</a></li>
-    <li><a href="#">Riset</a></li>
+    <li><a href="#">Tentang UKM</a></li>
+    <li><a href="#">Kegiatan</a></li>
+    <li><a href="#">Anggota</a></li>
     <li><a href="#">Kontak</a></li>
   </ul>
-  <button class="nav-cta">Daftar Sekarang</button>
+  <button class="nav-cta">Gabung UKM</button>
 </nav>
 
-<!-- Hero -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">Unit Kegiatan Mahasiswa</div>
+  <div class="hero-badge">Unit Kegiatan Mahasiswa · IT · UT Surakarta</div>
   <h1>
-    <span class="line-white">Selamat Datang di</span>
-    <span class="line-blue">ITUTSURAKARTA</span>
+    <span class="line-white">Satu Komunitas,</span>
+    <span class="line-blue">Sejuta Potensi</span>
   </h1>
   <p class="hero-sub">Universitas Terbuka Surakarta</p>
   <p class="hero-desc">
-    Membangun generasi teknolog unggul yang inovatif, berdaya saing global,
-    dan berkarakter. Bergabunglah dan wujudkan masa depan digital bersama kami.
+    UKM IT UT Surakarta adalah rumah bagi mahasiswa yang ingin tumbuh bersama —
+    belajar, berkolaborasi, dan berkarya nyata. Lebih dari 100 anggota aktif yang
+    saling mendukung dalam ilmu, relasi, dan kegiatan nyata.
   </p>
   <div class="hero-btns">
-    <a href="#" class="btn-primary">Jelajahi Program</a>
-    <a href="#" class="btn-secondary">Lihat Profil →</a>
+    <a href="#" class="btn-primary">Daftar Jadi Anggota</a>
+    <a href="#" class="btn-secondary">Lihat Kegiatan ↓</a>
   </div>
 </section>
 
-<!-- Stats -->
+<!-- STATS -->
 <div class="stats-bar">
   <div class="stat-item">
-    <div class="stat-num">2400+</div>
-    <div class="stat-label">Mahasiswa Aktif</div>
+    <div class="stat-num">100+</div>
+    <div class="stat-label">Anggota Aktif</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">96%</div>
-    <div class="stat-label">Tingkat Kelulusan</div>
+    <div class="stat-num">3</div>
+    <div class="stat-label">Program Unggulan</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">85+</div>
-    <div class="stat-label">Mitra Industri</div>
+    <div class="stat-num">50+</div>
+    <div class="stat-label">Relasi & Mitra</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">A</div>
-    <div class="stat-label">Akreditasi BAN-PT</div>
+    <div class="stat-num">5+</div>
+    <div class="stat-label">Tahun Berdiri</div>
   </div>
 </div>
 
-<!-- Ticker -->
+<!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <span class="ticker-item">Pendaftaran Mahasiswa Baru 2025/2026 Dibuka</span>
-    <span class="ticker-item">Seminar Nasional Teknologi Informasi — 20 April 2025</span>
-    <span class="ticker-item">Hackathon IT 2025 — Daftarkan Tim Anda</span>
-    <span class="ticker-item">Beasiswa Prestasi Akademik Tersedia</span>
-    <span class="ticker-item">Workshop AI & Machine Learning — 15 Mei 2025</span>
-    <span class="ticker-item">Pendaftaran Mahasiswa Baru 2025/2026 Dibuka</span>
-    <span class="ticker-item">Seminar Nasional Teknologi Informasi — 20 April 2025</span>
-    <span class="ticker-item">Hackathon IT 2025 — Daftarkan Tim Anda</span>
-    <span class="ticker-item">Beasiswa Prestasi Akademik Tersedia</span>
-    <span class="ticker-item">Workshop AI & Machine Learning — 15 Mei 2025</span>
+    <span class="ticker-item">Open Rekrutmen Anggota Baru UKM IT 2025 — Segera Daftar!</span>
+    <span class="ticker-item">MENTORING Batch 3 · Mulai 10 April 2025</span>
+    <span class="ticker-item">ROBOCODE Championship 2025 — Siapkan Tim Kamu</span>
+    <span class="ticker-item">ROBOFAM Family Gathering — Bangun Relasi & Persaudaraan</span>
+    <span class="ticker-item">Workshop Pemrograman Dasar — Gratis untuk Anggota Baru</span>
+    <span class="ticker-item">Open Rekrutmen Anggota Baru UKM IT 2025 — Segera Daftar!</span>
+    <span class="ticker-item">MENTORING Batch 3 · Mulai 10 April 2025</span>
+    <span class="ticker-item">ROBOCODE Championship 2025 — Siapkan Tim Kamu</span>
+    <span class="ticker-item">ROBOFAM Family Gathering — Bangun Relasi & Persaudaraan</span>
+    <span class="ticker-item">Workshop Pemrograman Dasar — Gratis untuk Anggota Baru</span>
   </div>
 </div>
 
-<!-- Cards -->
-<section class="cards-section">
-  <p class="section-title">Keunggulan Kami</p>
-  <h2 class="section-heading">Mengapa <span>UKM UT?</span></h2>
-  <div class="cards-grid">
-    <div class="card">
-      <div class="card-icon card-icon-blue">💻</div>
-      <h3>Kurikulum Berbasis Industri</h3>
-      <p>Kurikulum yang selalu diperbarui bersama mitra industri terkemuka untuk memastikan relevansi dan kesiapan kerja lulusan.</p>
+<!-- ABOUT UKM -->
+<section class="about-section">
+  <div class="about-grid">
+    <div class="about-content">
+      <p class="section-label" style="text-align:left; margin-bottom:10px;">Tentang Kami</p>
+      <h2>Komunitas yang <span>Membentuk</span> Generasi Digital</h2>
+      <p>UKM IT UT Surakarta bukan sekadar organisasi — kami adalah ekosistem belajar dan bertumbuh. Setiap anggota didorong untuk mengembangkan diri, memperluas jaringan, dan berkontribusi nyata di dunia teknologi.</p>
+      <p>Dengan lebih dari 100 anggota aktif, kami hadir sebagai wadah kolaborasi lintas angkatan yang menghubungkan sesama mahasiswa, alumni, dan profesional industri.</p>
+      <div class="about-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">📘</div>
+          <div class="pillar-text">
+            <strong>Ilmu</strong>
+            <span>Belajar bersama melalui mentoring, workshop, dan diskusi rutin</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div class="pillar-text">
+            <strong>Relasi</strong>
+            <span>Membangun jaringan luas dengan sesama mahasiswa, alumni, dan industri</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🎯</div>
+          <div class="pillar-text">
+            <strong>Kegiatan</strong>
+            <span>Program terstruktur yang mengasah skill teknis dan soft skill</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-icon card-icon-cyan">🤖</div>
-      <h3>Lab AI & Data Science</h3>
-      <p>Fasilitas laboratorium mutakhir untuk riset kecerdasan buatan, machine learning, dan analisis data berskala besar.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon card-icon-indigo">🌐</div>
-      <h3>Jaringan Alumni Global</h3>
-      <p>Terhubung dengan ribuan alumni yang tersebar di perusahaan teknologi terkemuka di Indonesia dan mancanegara.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon card-icon-blue">🏆</div>
-      <h3>Prestasi & Kompetisi</h3>
-      <p>Aktif dalam kompetisi nasional dan internasional — dari hackathon, olympiade informatika, hingga riset ilmiah.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon card-icon-cyan">📚</div>
-      <h3>Dosen Berpengalaman</h3>
-      <p>Tim pengajar berpendidikan S2 dan S3 dengan pengalaman industri langsung dan publikasi ilmiah internasional.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon card-icon-indigo">🚀</div>
-      <h3>Program Magang & Karier</h3>
-      <p>Kemitraan eksklusif untuk magang dan penempatan kerja di startup, BUMN, dan perusahaan multinasional.</p>
+    <div class="about-visual">
+      <div class="visual-card">
+        <div class="visual-card-num">100+</div>
+        <div class="visual-card-label">Anggota aktif dari berbagai angkatan & jurusan</div>
+      </div>
+      <div class="visual-card">
+        <div class="visual-card-num">3 Program</div>
+        <div class="visual-card-label">Kegiatan unggulan: Mentoring · Robocode · Robofam</div>
+      </div>
+      <div class="visual-card">
+        <div class="visual-card-num">Komunitas</div>
+        <div class="visual-card-label">Terbuka, inklusif, dan suportif untuk semua level kemampuan</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
+<div class="section-line"></div>
+
+<!-- KEGIATAN UTAMA -->
+<section class="kegiatan-section">
+  <p class="section-label">Program Kegiatan</p>
+  <h2 class="section-heading">3 Pilar Kegiatan <span>UKM IT</span></h2>
+  <div class="kegiatan-grid">
+
+    <!-- MENTORING -->
+    <div class="kegiatan-card">
+      <div class="keg-badge badge-mentoring">Program #1</div>
+      <div class="keg-num num-mentoring">01</div>
+      <div class="keg-title">MENTORING</div>
+      <p class="keg-desc">
+        Program bimbingan terstruktur di mana anggota senior membimbing anggota baru secara langsung. Setiap peserta mendapat mentor personal yang siap membantu dalam studi, karier, dan pengembangan diri.
+        <br><br>
+        Sesi dilakukan rutin setiap minggu, mencakup diskusi materi kuliah, tips belajar mandiri, hingga konsultasi pilihan karier di dunia IT.
+      </p>
+      <div class="keg-tags">
+        <span class="keg-tag">Bimbingan Personal</span>
+        <span class="keg-tag">Akademik</span>
+        <span class="keg-tag">Pengembangan Diri</span>
+        <span class="keg-tag">Rutin Mingguan</span>
+      </div>
+      <div class="keg-divider div-mentoring"></div>
+    </div>
+
+    <!-- ROBOCODE -->
+    <div class="kegiatan-card">
+      <div class="keg-badge badge-robocode">Program #2</div>
+      <div class="keg-num num-robocode">02</div>
+      <div class="keg-title">ROBOCODE</div>
+      <p class="keg-desc">
+        Kompetisi pemrograman berbasis robot virtual yang mengasah logika, strategi, dan kemampuan coding nyata. Peserta menulis kode untuk mengendalikan robot tempur dalam arena simulasi.
+        <br><br>
+        Lebih dari sekadar lomba — Robocode adalah ajang belajar coding, kerja tim, dan berpikir algoritmik secara menyenangkan dan kompetitif.
+      </p>
+      <div class="keg-tags">
+        <span class="keg-tag">Pemrograman</span>
+        <span class="keg-tag">Kompetisi</span>
+        <span class="keg-tag">Algoritma</span>
+        <span class="keg-tag">Tim & Individu</span>
+      </div>
+      <div class="keg-divider div-robocode"></div>
+    </div>
+
+    <!-- ROBOFAM -->
+    <div class="kegiatan-card">
+      <div class="keg-badge badge-robofam">Program #3</div>
+      <div class="keg-num num-robofam">03</div>
+      <div class="keg-title">ROBOFAM</div>
+      <p class="keg-desc">
+        Kegiatan kekeluargaan dan membangun relasi seluruh anggota UKM IT. Robofam hadir sebagai ruang untuk saling mengenal, mempererat ikatan persaudaraan, dan membangun jaringan yang kuat antar sesama anggota.
+        <br><br>
+        Diisi dengan games, sharing session, outing, dan momen kebersamaan yang tak terlupakan bagi seluruh keluarga UKM IT.
+      </p>
+      <div class="keg-tags">
+        <span class="keg-tag">Kekeluargaan</span>
+        <span class="keg-tag">Networking</span>
+        <span class="keg-tag">Fun Activities</span>
+        <span class="keg-tag">Community</span>
+      </div>
+      <div class="keg-divider div-robofam"></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-line"></div>
+
+<!-- MANFAAT BERGABUNG -->
+<section class="manfaat-section">
+  <p class="section-label">Kenapa Bergabung?</p>
+  <h2 class="section-heading">Yang Kamu <span>Dapatkan</span></h2>
+  <div class="manfaat-grid">
+    <div class="manfaat-card">
+      <div class="manfaat-icon">🧠</div>
+      <h3>Ilmu & Skill Nyata</h3>
+      <p>Akses ke sesi belajar, workshop, dan diskusi teknis yang relevan dengan dunia IT dan kebutuhan industri saat ini.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="manfaat-icon">🌐</div>
+      <h3>Relasi yang Luas</h3>
+      <p>Terhubung dengan 100+ anggota aktif, alumni berpengalaman, serta mitra dan profesional dari berbagai perusahaan teknologi.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="manfaat-icon">💻</div>
+      <h3>Pengalaman Coding</h3>
+      <p>Berlatih pemrograman secara praktikal melalui Robocode dan proyek kolaboratif yang menantang dan terstruktur.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="manfaat-icon">🏅</div>
+      <h3>Sertifikasi & Portofolio</h3>
+      <p>Ikut kompetisi, dapatkan sertifikat keikutsertaan, dan bangun portofolio yang memperkuat CV dan profil profesionalmu.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="manfaat-icon">❤️</div>
+      <h3>Komunitas Suportif</h3>
+      <p>Lingkungan yang inklusif dan saling mendukung. Di sini tidak ada yang belajar sendirian — semua tumbuh bersama.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="manfaat-icon">🚀</div>
+      <h3>Akselerasi Karier</h3>
+      <p>Dari mentoring hingga info lowongan eksklusif — UKM IT membantumu melangkah lebih cepat menuju karier impian di bidang teknologi.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-line"></div>
+
+<!-- TESTIMONI -->
+<section class="testimonial-section">
+  <p class="section-label">Kata Mereka</p>
+  <h2 class="section-heading">Suara <span>Anggota UKM IT</span></h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Bergabung di UKM IT adalah salah satu keputusan terbaik selama kuliah. Program Mentoring benar-benar membantu saya memahami materi yang susah dan bikin semangat belajar lagi."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">A</div>
+        <div>
+          <div class="testi-name">Arif Wahyudi</div>
+          <div class="testi-role">Anggota · Angkatan 2023</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Robocode itu seru banget! Awalnya saya kira cuma game biasa, ternyata tantangannya nyata dan belajar algoritmanya langsung terasa manfaatnya di mata kuliah."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">D</div>
+        <div>
+          <div class="testi-name">Dina Rahmawati</div>
+          <div class="testi-role">Peserta Robocode · 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Robofam bikin saya kenal banyak orang baru dari angkatan berbeda. Relasi yang dibangun di sini beneran berguna — dari info kerja sampai teman diskusi bareng."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Reza Firmansyah</div>
+          <div class="testi-role">Alumni · Anggota Aktif</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <h2>Siap Bergabung Bersama 100+ Anggota?</h2>
+  <p>Jadilah bagian dari komunitas IT yang aktif, suportif, dan penuh semangat belajar. Pendaftaran anggota baru UKM IT UT Surakarta kini dibuka!</p>
+  <div class="hero-btns" style="justify-content:center">
+    <a href="#" class="btn-primary">Daftar Sekarang</a>
+    <a href="#" class="btn-secondary">Hubungi Kami →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">IT UT <span>Surakarta</span></div>
+  <div class="footer-logo">UKM IT <span>UT Surakarta</span></div>
   <ul class="footer-links">
-    <li><a href="#">Tentang Kami</a></li>
-    <li><a href="#">Akademik</a></li>
-    <li><a href="#">Berita</a></li>
+    <li><a href="#">Beranda</a></li>
+    <li><a href="#">Kegiatan</a></li>
+    <li><a href="#">Anggota</a></li>
     <li><a href="#">Kontak</a></li>
   </ul>
   <div class="footer-copy">© 2025 UKM IT UT Surakarta. All rights reserved.</div>
